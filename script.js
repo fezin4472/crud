@@ -10,64 +10,106 @@ let i = 0;
 let veiculos = [];
 
 function savedata(){
-    localStorage.setItem('carros', JSON.stringify(carros));
+    localStorage.setItem('veiculos', JSON.stringify(veiculos));
 }
 
 function loaddata(){
-    carros = JSON.parse(localStorage.getItem('carros'));
+    veiculos = JSON.parse(localStorage.getItem('veiculos')) || [];
 }
 
 function register(){
     loaddata()
 
-    const newcar = {
+    const newvehicle = {
         id: Date.now(),
-        marcaemodelo: document.getElementById('input-marca-modelo').value,
+        marca: document.getElementById('input-marca').value,
+        modelo: document.getElementById('input-modelo').value,
+        tipo: document.getElementById('input-tipo').value,
         potencia: Number(document.getElementById('input-potencia').value),
         cor: document.getElementById('input-cor').value,
         ano: Number(document.getElementById('input-ano').value),
-        fipe: document.getElementById('input-fipe').value,
-        media: document.getElementById('input-media').value
+        fipe: document.getElementById('input-fipe').value
     }
-    carros.push(newcar);
 
-    console.log(carros);
-    
+    veiculos.push(newvehicle)
 
+    console.log(veiculos);
+
+    clearform();
+    showform();
+
+    savedata();
 }
 
 function clearform(){
-    document.getElementById('input-marca-modelo').value = ''
+    document.getElementById('input-marca').value = ''
+    document.getElementById('input-modelo').value = ''
+    document.getElementById('input-tipo').value = ''
     document.getElementById('input-potencia').value = ''
     document.getElementById('input-cor').value = ''
     document.getElementById('input-ano').value = ''
     document.getElementById('input-fipe').value = ''
-    document.getElementById('input-media').value = ''
 
-    document.getElementById('input-marca-modelo').focus();
+    document.getElementById('input-marca').focus();
 }
 
 function showform(){
     document.getElementById('panel').innerHTML = ''
 
-    for(i = 0; i < carros.length; i++){
+    for(i = 0; i < veiculos.length; i++){
         document.getElementById('panel').innerHTML +=
         `<div class="card-carros">
-            <h2>${carros[i].marcaemodelo}</h2>
-            <p>potência em cavalos: ${carros[i].potencia}</p>
-            <p>cor: ${carros[i].cor}</p>
-            <p>ano: ${carros[i].ano}</p>
-            <p>tabela fipe: ${carros[i].fipe}</p>
-            <p>preço médio na olx: ${carros[i].media}</p>
+            <h2>${veiculos[i].marca} ${veiculos[i].modelo}</h2>
+            <p>tipo: ${veiculos[i].tipo}</p>
+            <p>potênica em cavalos: ${veiculos[i].potencia}</p>
+            <p>cor: ${veiculos[i].cor}</p>
+            <p>ano: ${veiculos[i].ano}</p>
+            <p>tabela fipe: ${veiculos[i].fipe}</p>
+            <p>id: ${veiculos[i].id}</p>
         </div>
         `
     }
 }
 
 function search(){
-    let procurado = document.getElementById('input-marca-modelo').value
+    let procurado = document.getElementById('input-modelo').value
 
-    for(i = 0; i < carros.length; i++){
-        if(procurado == carros[i].marcaemodelo){}
+    for(i = 0; i < veiculos.length; i++){
+        if(procurado == veiculos[i].modelo){
+            console.log(carros[i]);
+            document.getElementById('input-tipo').value = veiculos[i].tipo
+            document.getElementById('input-potencia').value = veiculos[i].potencia
+            document.getElementById('input-cor').value = veiculos[i].cor
+            document.getElementById('input-ano').value = veiculos[i].ano
+            document.getElementById('input-fipe').value = veiculos[i].fipe
+            console.log(i);
+        }
     }
+}
+
+function savecar(){
+    let id = veiculos.id
+
+    for(i = 0; i < veiculos.length; i++){
+        console.log(veiculos[i]);
+        veiculos[i].tipo = document.getElementById('input-tipo').value
+        veiculos[i].potencia = document.getElementById('input-potencia').value
+        veiculos[i].cor = document.getElementById('input-cor').value
+        veiculos[i].ano = document.getElementById('input-ano').value
+        veiculos[i].fipe = document.getElementById('input-fipe').value
+    }
+    showform()
+    clearform()
+}
+
+function deletecar(){
+    let id = veiculos.id
+
+    for(i = 0; i < veiculos.length; i++){
+        console.log(veiculos[i]);
+        veiculos.splice(i, 1)
+        console.log(i);
+    }
+    showform()
+    clearform()
 }

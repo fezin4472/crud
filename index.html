@@ -8,16 +8,24 @@
     <title>crud alpha ver 1.0</title>
 </head>
 <body>
-    <h1>GUARDA SEUS VEÍCULOS SEJA CARRO MOTO ÔNIBUS CAMINHÃO AQUI</h1>
+    <h1>GUARDA SEUS VEÍCULOS FAVORITOS SEJA CARRO MOTO ÔNIBUS CAMINHÃO AQUI</h1>
 
     <div class="form">
         <div class="c-inputs">
-            <span>marca e modelo:</span>
-            <input type="text" id="input-marca-modelo" placeholder="digite aqui">
+            <span>marca:</span>
+            <input type="text" id="input-marca" placeholder="digite aqui">
+        </div>
+        <div class="c-inputs">
+            <span>modelo:</span>
+            <input type="text" id="input-modelo" placeholder="digite aqui">
+        </div>
+        <div class="c-inputs">
+            <span>tipo:</span>
+            <input type="text" id="input-tipo" placeholder="digite aqui">
         </div>
         <div class="c-inputs">
             <span>potênica em cavalos:</span>
-            <input type="number" class="input-potencia" placeholder="digite aqui">
+            <input type="number" id="input-potencia" placeholder="digite aqui">
         </div>
         <div class="c-inputs">
             <span>cor:</span>
@@ -31,12 +39,15 @@
             <span>tabela fipe:</span>
             <input type="text" id="input-fipe" placeholder="digite aqui">
         </div>
-        <div class="c-inputs">
-            <span>preço médio na olx (opcional):</span>
-            <input type="text" id="input-media" placeholder="digite aqui">
-        </div>
 
-        <button>registrar</button>
+        <button onclick="register()">registrar +</button>
+        <button onclick="savecar()">salvar 📁</button>
+        <button onclick="deletecar()">excluir 🗑️</button>
+    </div>
+
+    <div class="buttons">
+        <button onclick="showform()">mostrar</button>
+        <button onclick="search()">pesquisar 🔍</button>
     </div>
 
     <div id="panel">
