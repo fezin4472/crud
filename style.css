@@ -14,21 +14,42 @@ body{
 
 h1{
     color: #fff;
-    font-size: 20px;
+    font-size: 30px;
+}
+
+.card-carros{
+    background-color: #fff;
+    /* margin: 5px; */
+    width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+}
+
+#panel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    place-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
 }
 
 .form{
-    background: #fff;
+    background-color: #fff;
     width: 40%;
-    border-radius: 6px;
+
     border: 1px solid #000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     place-items: center;
     gap: 10px;
-    padding: 2px;
+
+    padding: 25px;
+    border-radius: 10px;
 }
+
 .c-inputs{
     display: flex;
     flex-direction: column;

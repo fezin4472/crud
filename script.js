@@ -7,14 +7,20 @@ D = delete
 
 let i = 0;
 
-let veiculos = [];
+let carros = [];
 
 function savedata(){
-    localStorage.setItem('veiculos', JSON.stringify(veiculos));
+    localStorage.setItem('carros', JSON.stringify(carros));
+
+    /* let text = JSON.stringify(carros)
+    localStorage.setItem('carros', text) */
 }
 
 function loaddata(){
-    veiculos = JSON.parse(localStorage.getItem('veiculos')) || [];
+    carros = JSON.parse(localStorage.getItem('carros')) || [];
+
+    /* let readedtext = localStorage.getItem('carros')
+    carros = JSON.parse(readedtext) || []; */
 }
 
 function register(){
@@ -24,16 +30,14 @@ function register(){
         id: Date.now(),
         marca: document.getElementById('input-marca').value,
         modelo: document.getElementById('input-modelo').value,
-        tipo: document.getElementById('input-tipo').value,
-        potencia: Number(document.getElementById('input-potencia').value),
-        cor: document.getElementById('input-cor').value,
         ano: Number(document.getElementById('input-ano').value),
-        fipe: document.getElementById('input-fipe').value
+        tipo: document.getElementById('input-tipo').value,
+        economia: Number(document.getElementById('input-economia').value)
     }
 
-    veiculos.push(newvehicle)
+    carros.push(newvehicle)
 
-    console.log(veiculos);
+    console.log(carros);
 
     clearform();
     showform();
@@ -44,11 +48,9 @@ function register(){
 function clearform(){
     document.getElementById('input-marca').value = ''
     document.getElementById('input-modelo').value = ''
-    document.getElementById('input-tipo').value = ''
-    document.getElementById('input-potencia').value = ''
-    document.getElementById('input-cor').value = ''
     document.getElementById('input-ano').value = ''
-    document.getElementById('input-fipe').value = ''
+    document.getElementById('input-tipo').value = ''
+    document.getElementById('input-economia').value = ''
 
     document.getElementById('input-marca').focus();
 }
@@ -56,16 +58,14 @@ function clearform(){
 function showform(){
     document.getElementById('panel').innerHTML = ''
 
-    for(i = 0; i < veiculos.length; i++){
+    for(i = 0; i < carros.length; i++){
         document.getElementById('panel').innerHTML +=
         `<div class="card-carros">
-            <h2>${veiculos[i].marca} ${veiculos[i].modelo}</h2>
-            <p>tipo: ${veiculos[i].tipo}</p>
-            <p>potênica em cavalos: ${veiculos[i].potencia}</p>
-            <p>cor: ${veiculos[i].cor}</p>
-            <p>ano: ${veiculos[i].ano}</p>
-            <p>tabela fipe: ${veiculos[i].fipe}</p>
-            <p>id: ${veiculos[i].id}</p>
+            <h2>${carros[i].marca} <br> ${carros[i].modelo}</h2>
+            <p>ano: ${carros[i].ano}</p>
+            <p>tipo: ${carros[i].tipo}</p>
+            <p>ecônomia: ${carros[i].economia} km/l</p>
+            <p>id: ${carros[i].id}</p>
         </div>
         `
     }
@@ -74,40 +74,36 @@ function showform(){
 function search(){
     let procurado = document.getElementById('input-modelo').value
 
-    for(i = 0; i < veiculos.length; i++){
-        if(procurado == veiculos[i].modelo){
+    for(i = 0; i < carros.length; i++){
+        if(procurado == carros[i].modelo){
             console.log(carros[i]);
-            document.getElementById('input-tipo').value = veiculos[i].tipo
-            document.getElementById('input-potencia').value = veiculos[i].potencia
-            document.getElementById('input-cor').value = veiculos[i].cor
-            document.getElementById('input-ano').value = veiculos[i].ano
-            document.getElementById('input-fipe').value = veiculos[i].fipe
+            document.getElementById('input-ano').value = carros[i].ano
+            document.getElementById('input-tipo').value = carros[i].tipo
+            document.getElementById('input-economia').value = carros[i].economia
             console.log(i);
         }
     }
 }
 
 function savecar(){
-    let id = veiculos.id
+    let id = carros.id
 
-    for(i = 0; i < veiculos.length; i++){
-        console.log(veiculos[i]);
-        veiculos[i].tipo = document.getElementById('input-tipo').value
-        veiculos[i].potencia = document.getElementById('input-potencia').value
-        veiculos[i].cor = document.getElementById('input-cor').value
-        veiculos[i].ano = document.getElementById('input-ano').value
-        veiculos[i].fipe = document.getElementById('input-fipe').value
+    for(i = 0; i < carros.length; i++){
+        console.log(carros[i]);
+        carros[i].ano = document.getElementById('input-ano').value
+        carros[i].tipo = document.getElementById('input-tipo').value
+        carros[i].economia = Number(document.getElementById('input-economia').value)
     }
     showform()
     clearform()
 }
 
 function deletecar(){
-    let id = veiculos.id
+    let id = carros.id
 
-    for(i = 0; i < veiculos.length; i++){
-        console.log(veiculos[i]);
-        veiculos.splice(i, 1)
+    for(i = 0; i < carros.length; i++){
+        console.log(carros[i]);
+        carros.splice(i, 1)
         console.log(i);
     }
     showform()
