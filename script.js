@@ -64,7 +64,7 @@ function showform(){
             <h2>${carros[i].marca} <br> ${carros[i].modelo}</h2>
             <p>ano: ${carros[i].ano}</p>
             <p>tipo: ${carros[i].tipo}</p>
-            <p>ecônomia: ${carros[i].economia} km/l</p>
+            <p>economia: ${carros[i].economia} km/l</p>
             <p>id: ${carros[i].id}</p>
         </div>
         `
