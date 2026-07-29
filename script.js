@@ -27,12 +27,12 @@ function register(){
     loaddata()
 
     const newvehicle = {
-        id: Date.now(),
         marca: document.getElementById('input-marca').value,
         modelo: document.getElementById('input-modelo').value,
         ano: Number(document.getElementById('input-ano').value),
         tipo: document.getElementById('input-tipo').value,
-        economia: Number(document.getElementById('input-economia').value)
+        economia: Number(document.getElementById('input-economia').value),
+        placa: document.getElementById('input-placa').value
     }
 
     carros.push(newvehicle)
@@ -51,6 +51,7 @@ function clearform(){
     document.getElementById('input-ano').value = ''
     document.getElementById('input-tipo').value = ''
     document.getElementById('input-economia').value = ''
+    document.getElementById('input-placa').value = ''
 
     document.getElementById('input-marca').focus();
 }
@@ -65,18 +66,22 @@ function showform(){
             <p>ano: ${carros[i].ano}</p>
             <p>tipo: ${carros[i].tipo}</p>
             <p>economia: ${carros[i].economia} km/l</p>
-            <p>id: ${carros[i].id}</p>
+            <p>placa: ${carros[i].placa}</p>
+            <button onclick="savecar('${carros[i].placa}')">salvar 📁</button>
+            <button onclick="deletecar('${carros[i].placa}')">excluir 🗑️</button>
         </div>
         `
     }
 }
 
 function search(){
-    let procurado = document.getElementById('input-modelo').value
+    let procurado = document.getElementById('input-placa').value
 
     for(i = 0; i < carros.length; i++){
-        if(procurado == carros[i].modelo){
+        if(procurado == carros[i].placa){
             console.log(carros[i]);
+            document.getElementById('input-marca').value = carros[i].marca
+            document.getElementById('input-modelo').value = carros[i].modelo
             document.getElementById('input-ano').value = carros[i].ano
             document.getElementById('input-tipo').value = carros[i].tipo
             document.getElementById('input-economia').value = carros[i].economia
@@ -85,27 +90,38 @@ function search(){
     }
 }
 
-function savecar(){
-    let id = carros.id
+function savecar(placa){
+    loaddata()
 
     for(i = 0; i < carros.length; i++){
-        console.log(carros[i]);
-        carros[i].ano = document.getElementById('input-ano').value
-        carros[i].tipo = document.getElementById('input-tipo').value
-        carros[i].economia = Number(document.getElementById('input-economia').value)
+        if(placa == carros[i].modelo){
+            console.log(carros[i]);
+            carros[i].marca = document.getElementById('input-marca').value
+            carros[i].modelo = document.getElementById('input-modelo').value
+            carros[i].ano = document.getElementById('input-ano').value
+            carros[i].tipo = document.getElementById('input-tipo').value
+            carros[i].economia = document.getElementById('input-economia').value
+            console.log(i);
+        }
     }
+    savedata()
+
     showform()
     clearform()
 }
 
-function deletecar(){
-    let id = carros.id
+function deletecar(placa){
+    loaddata()
 
     for(i = 0; i < carros.length; i++){
-        console.log(carros[i]);
-        carros.splice(i, 1)
-        console.log(i);
+        if(placa == carros[i].placa){
+            console.log(carros[i]);
+            carros.splice(i, 1)
+            console.log(i);
+        }
     }
+    savedata()
+
     showform()
     clearform()
 }

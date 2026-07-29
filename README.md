@@ -2,3 +2,7 @@
 
 guarde seus carros favoritos à combustão aqui como uma garagem
 
+## COMO FUNCIONA
+
+
+
