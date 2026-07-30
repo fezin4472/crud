@@ -26,6 +26,11 @@ function loaddata(){
 function register(){
     loaddata()
 
+    if(ifelseplaca()){
+        alert('tem um carro que já tem essa placa')
+        return
+    }
+
     const newvehicle = {
         marca: document.getElementById('input-marca').value,
         modelo: document.getElementById('input-modelo').value,
@@ -34,15 +39,26 @@ function register(){
         economia: Number(document.getElementById('input-economia').value),
         placa: document.getElementById('input-placa').value
     }
-
-    carros.push(newvehicle)
-
+    
+    carros.push(newvehicle);
     console.log(carros);
+
+    savedata();
 
     clearform();
     showform();
 
-    savedata();
+}
+
+function ifelseplaca(){
+    let placa = document.getElementById('input-placa').value;
+
+    for(i = 0; i < carros.length; i++){
+        if(placa == carros[i].placa){
+            return true
+        }
+    }
+    return false
 }
 
 function clearform(){
@@ -57,6 +73,7 @@ function clearform(){
 }
 
 function showform(){
+    loaddata()
     document.getElementById('panel').innerHTML = ''
 
     for(i = 0; i < carros.length; i++){
@@ -75,6 +92,7 @@ function showform(){
 }
 
 function search(){
+    loaddata()
     let procurado = document.getElementById('input-placa').value
 
     for(i = 0; i < carros.length; i++){
@@ -86,6 +104,8 @@ function search(){
             document.getElementById('input-tipo').value = carros[i].tipo
             document.getElementById('input-economia').value = carros[i].economia
             console.log(i);
+        }else{
+            alert('esse carro ou está excluido ou você apagou');
         }
     }
 }
@@ -93,8 +113,10 @@ function search(){
 function savecar(placa){
     loaddata()
 
+    console.log(placa);
+    
     for(i = 0; i < carros.length; i++){
-        if(placa == carros[i].modelo){
+        if(placa == carros[i].placa){
             console.log(carros[i]);
             carros[i].marca = document.getElementById('input-marca').value
             carros[i].modelo = document.getElementById('input-modelo').value
@@ -108,6 +130,7 @@ function savecar(placa){
 
     showform()
     clearform()
+
 }
 
 function deletecar(placa){
